@@ -53,9 +53,20 @@
                         .attr( 'src', camera.url + camera.stream_route )
                     .appendTo( $cam_viewport );
 
-                $control_box = $( '<div>' )
+            if (camera.control_route)
+            {
+              makeControlBox(camera).appendTo($cam_box);
+            }
+            
+            return $cam_box;
+
+        };
+
+        
+        var makeControlBox = function(camera) {
+              
+            $control_box = $( '<div>' )
                     .addClass( 'bar' )
-                .appendTo( $cam_box );
 
                     $control_motion_buttons = $( '<div>' )
                         .addClass( 'motion-buttons' )
@@ -96,11 +107,8 @@
                             )
                         .mousedown( function(){ moveCamera(camera, 'right', 'start') } )
                         .mouseup( function(){ moveCamera(camera, 'right', 'end') } );  
-
-
-
-            return $cam_box;
-
+        
+            return $control_box;
         };
 
 
